@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation beanclass="custom.webclient.beans.fbi.FbiLoggerAppBean" id="fbilogger" ismobile="false" mboname="FBILOGGERMAIN" resultstableid="results_showlist">
+	<page id="mainrec" scroll="false">
+		<include controltoclone="pageHeader" id="INCLUDE-pageHeader"/>
+		<clientarea id="clientarea">
+			<tabgroup id="maintabs" style="form">
+				<tab default="true" id="results" label="List" type="list">
+					<menubar event="search" id="actiontoolbar1" sourcemethod="getAppSearchOptions"/>
+					<table beanclass="custom.webclient.beans.fbi.FbiLoggerResultsBean" id="results_showlist" inputmode="readonly" label="Records Exported" mboname="FBILOGGERMAIN" orderby="exportdate desc" selectmode="multiple" startempty="false">
+						<tablebody displayrowsperpage="20" filterable="true" filterexpanded="true" id="results_showlist_tablebody">
+							<tablecol dataattribute="INSTANCENAME" filterable="false" id="results_showlist_column_select" mxevent="toggleselectrow" mxevent_desc="Select Row {0}" sortable="false" type="event"/>
+							<tablecol dataattribute="CRONTASKNAME" id="results_showlist_column1" inputmode="readonly" label="Integration System" mxevent="selectrecord" mxevent_desc="Go To %1" type="link" usefieldsizegroup="false"/>
+							<tablecol dataattribute="INSTANCENAME" id="results_showlist_column2" inputmode="readonly" label="Integration Ref#" mxevent="selectrecord" mxevent_desc="Go To %1" type="link" usefieldsizegroup="false"/>
+							<tablecol dataattribute="OWNERTABLE" id="results_showlist_column3" inputmode="readonly" label="Object Name" mxevent="selectrecord" mxevent_desc="Go To %1" type="link" usefieldsizegroup="false"/>
+							<tablecol dataattribute="MBONUM" id="results_showlist_column5" inputmode="readonly" label="Record#"/>
+							<tablecol dataattribute="OWNERID" id="results_showlist_column4" inputmode="readonly" label="Record Key#"/>
+							<tablecol dataattribute="EXPORTDATE" id="results_showlist_column6" inputmode="readonly"/>
+							<tablecol dataattribute="ORGID" id="1715088572136" inputmode="readonly"/>
+							<tablecol filterable="false" id="results_bookmark" mxevent="REEXPORT" mxevent_desc="Mark For Re-Export" mxevent_icon="nav_icon_export.gif" sigoption="HIDE" sortable="false" type="event"/>
+						</tablebody>
+					</table>
+				</tab>
+				<tab id="main" label="Main" type="insert">
+					<section border="true" id="header1">
+						<sectionrow id="header1_r1">
+							<sectioncol id="header1_r1c1">
+								<section id="header1_r1c1s1" inputmode="readonly">
+									<textbox dataattribute="CRONTASKNAME" id="header1_r1c1s1_1" label="Integration System" size="24"/>
+									<textbox dataattribute="INSTANCENAME" id="header1_r1c1s1_2" label="Integration Ref#" size="24"/>
+									<multilinetextbox dataattribute="CRONINSTANCE.DESCRIPTION" id="1715063431538" inputmode="readonly" label="Integration Overview" lookup="LONGDESC"/>
+									<textbox dataattribute="OWNERTABLE" id="header1_r1c1s1_5" inputmode="readonly" label="Object Name" size="24"/>
+									<textbox dataattribute="ORGID" id="1715088881784" inputmode="readonly" size="24"/>
+									<textbox dataattribute="MBONUM" id="header1_r1c1s1_7" inputmode="readonly" label="Record#" size="24"/>
+									<textbox dataattribute="OWNERID" id="header1_r1c1s1_6" label="Record Key#" menutype="HYPERLINKFORWORKDETAILS" size="24"/>
+								</section>
+							</sectioncol>
+							<sectioncol id="header1_r1c2">
+								<section id="header1_r1c2s1" inputmode="readonly">
+									<textbox dataattribute="CRONINSTANCE.SCHEDULE" id="header1_r1c1s1_4" label="Schedule" size="24"/>
+									<textbox dataattribute="CRONINSTANCE.FBIPARAMETER1.VALUE" id="header1_r1c2s1_8" label="Output Folder" size="24"/>
+									<multilinetextbox columns="40" dataattribute="CRONINSTANCE.FBIPARAMETER2.VALUE" id="header1_r1c2s1_9" label="Selection Criteria" rows="8"/>
+								</section>
+							</sectioncol>
+							<sectioncol id="header1_r1c3">
+								<section id="header1_r1c3s1">
+									<multilinetextbox columns="26" dataattribute="REEXPORTEDJUST" id="header1_r1c3s1_1" label="Justification" rows="8"/>
+									<buttongroup align="left" id="reexport_buttongroup" label="Mark For Re-Export" labelalign="right">
+										<pushbutton id="reexport_btn" image="nav_icon_export.gif" mxevent="REEXPORT"/>
+									</buttongroup>
+								</section>
+							</sectioncol>
+						</sectionrow>
+					</section>
+					<section border="true" id="fbiLogger_section">
+						<table id="fbiLogger_table" inputmode="readonly" label="Log Records" relationship="FBILOGGER" selectmode="single">
+							<tablebody filterable="true" id="fbiLogger_tablebody">
+								<tablecol filterable="false" id="fbiLogger_tablebody_toggledetails" mxevent="toggledetailstate" mxevent_desc="Show Detail" sortable="false" type="event"/>
+								<tablecol dataattribute="EXPORTDATE" id="fbiLogger_table1" inputmode="readonly"/>
+								<tablecol dataattribute="FBILOGGERFILE.FILETYPE" id="fbiLogger_table2" inputmode="readonly" label="File type"/>
+								<tablecol dataattribute="FBILOGGERFILE.FILENAME" id="fbiLogger_table3" inputmode="readonly" label="File name"/>
+							</tablebody>
+							<tabledetails id="fbiLogger_tabledetails">
+								<section border="true" id="filedata_section" label="File Content">
+									<multilinetextbox columns="60" dataattribute="FBILOGGERFILE.NPFILEDATA" id="fbiLogger_table_npfiledata" inputmode="readonly" rows="6"/>
+								</section>
+							</tabledetails>
+						</table>
+					</section>
+					<section border="true" id="fbiLoggerhist_section">
+						<table id="fbiLoggerhist_table" inputmode="readonly" label="History Records" relationship="FBILOGGERHIST" selectmode="single">
+							<tablebody filterable="true" id="fbiLoggerhist_tablebody">
+								<tablecol filterable="false" id="fbiLoggerhist_tablebody_toggledetails" mxevent="toggledetailstate" mxevent_desc="Show Detail" sortable="false" type="event"/>
+								<tablecol dataattribute="FBIEXPORTFLAG.description" id="fbiLoggerhist_table1" inputmode="readonly" label="Export Flag"/>
+								<tablecol dataattribute="EXPORTDATE" id="fbiLoggerhist_table2" inputmode="readonly"/>
+								<tablecol dataattribute="FBILOGGERFILE.FILETYPE" id="fbiLoggerhist_table3" inputmode="readonly" label="File type"/>
+								<tablecol dataattribute="FBILOGGERFILE.FILENAME" id="fbiLoggerhist_table4" inputmode="readonly" label="File name"/>
+								<tablecol dataattribute="REEXPORTEDBY" id="fbiLoggerhist_table5" inputmode="readonly"/>
+								<tablecol dataattribute="REEXPORTEDDATE" id="fbiLoggerhist_table6" inputmode="readonly"/>
+							</tablebody>
+							<tabledetails id="fbiLoggerhist_tabledetails">
+								<section border="true" id="fbiLoggerhist_reexport_justification_section" label="Re-Export Justification">
+									<multilinetextbox columns="60" dataattribute="REEXPORTEDJUST" id="fbiLoggerhist_reexport_justification" label="Justification" rows="3"/>
+								</section>
+								<section border="true" id="filedatahist_section" label="File Content">
+									<multilinetextbox columns="70" dataattribute="FBILOGGERFILE.NPFILEDATA" id="fbiLoggerhist_table_npfiledata" inputmode="readonly" rows="6"/>
+								</section>
+							</tabledetails>
+						</table>
+					</section>
+				</tab>
+			</tabgroup>
+		</clientarea>
+		<include controltoclone="pageFooter" id="INCLUDE-pageFooter"/>
+	</page>
+	<configurationblock id="datastore_configurationblock"> </configurationblock>
+</presentation>
